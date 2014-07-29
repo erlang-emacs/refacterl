@@ -200,6 +200,8 @@
 
 (add-hook 'erlang-mode-hook 'erlang--insert-module)
 
+;; TODO: make the keybindings more customizable. Perhaps make a
+;; minor-mode?
 (eval-after-load 'erlang
   '(progn
     (define-key erlang-mode-map (kbd "C-x C-a d b") 'erlang--binaries-to-defines)
