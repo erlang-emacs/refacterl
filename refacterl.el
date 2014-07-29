@@ -8,7 +8,14 @@
 ;; Keywords: erlang, tools
 
 ;;; Code:
-(require 'aero-util)
+
+(defun buffer-empty? ()
+  (string= "" (buffer-substring-no-properties (point-max) 1)))
+
+(defun trim-string (string)
+  (replace-regexp-in-string
+   "\\`[ \t\n]*" ""
+   (replace-regexp-in-string "[ \t\n]*\\'" "" string)))
 
 (defun move-to-export ()
   (search-backward "-export" nil t))
