@@ -204,10 +204,10 @@
 ;; minor-mode?
 (eval-after-load 'erlang
   '(progn
-    (define-key erlang-mode-map (kbd "C-x C-a d b") 'erlang--binaries-to-defines)
-    (define-key erlang-mode-map (kbd "C-x C-a c s") 'erlang--cycle-string-like)
-    (define-key erlang-mode-map (kbd "C-x C-a s e") 'erlang--split-exports)
-    (define-key erlang-mode-map (kbd "C-x C-a e f") 'erlang--export-fun-at-point)))
+     (define-key erlang-mode-map (kbd "C-x C-a d b") 'erlang--binaries-to-defines)
+     (define-key erlang-mode-map (kbd "C-x C-a c s") 'erlang--cycle-string-like)
+     (define-key erlang-mode-map (kbd "C-x C-a s e") 'erlang--split-exports)
+     (define-key erlang-mode-map (kbd "C-x C-a e f") 'erlang--export-fun-at-point)))
 
 (provide 'refacterl)
 ;;; refacterl.el ends here
