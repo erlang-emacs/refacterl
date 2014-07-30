@@ -180,7 +180,7 @@
     (let ((fn-and-arity (erlang-get-function-name-and-arity)))
       (when (and fn-and-arity (not (erlang--fun-at-point-exported-p)))
         (move-to-exports-or-module)
-        (insert (format "-export([%s])." fn-and-arity))))))
+        (insert (format "-export([%s]).\n" fn-and-arity))))))
 
 (defun erlang--unexport-fun-at-point ()
   (interactive)
