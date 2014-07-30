@@ -188,9 +188,10 @@
     (print fn-and-arity)
     (when fn-and-arity
       (progn
-        (goto-char 0)
-        (delete-matching-lines
-         (regexp-quote (format "-export([%s]).\n" fn-and-arity)))))))
+        (save-excursion
+          (goto-char 0)
+          (delete-matching-lines
+           (regexp-quote (format "-export([%s]).\n" fn-and-arity))))))))
 
 (defun erlang--toggle-export-fun-at-point ()
   (interactive)
