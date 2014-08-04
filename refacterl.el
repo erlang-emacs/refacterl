@@ -203,6 +203,7 @@
 
 ;; TODO: make the keybindings more customizable. Perhaps make a
 ;; minor-mode?
+;;;###autoload
 (eval-after-load 'erlang
   '(progn
      (define-key erlang-mode-map (kbd "C-x C-a d b") 'erlang--binaries-to-defines)
