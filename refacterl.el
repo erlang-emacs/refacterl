@@ -100,6 +100,17 @@
         (insert "-endif."))
     (message "Refusing to insert header guards.")))
 
+(defun erlang--insert-header-guard-to-existing-file ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (let ((mod-name (erlang-get-module-from-file-name)))
+      (insert (format "-ifndef(%s_HEADER_GUARD).\n" (upcase mod-name)))
+      (goto-char (point-max))
+      (insert (format "-define(%s_HEADER_GUARD, true)." (upcase mod-name)))
+      (newline-and-indent)
+      (insert "-endif."))))
+
 (defun define->string (define)
   (format "-define(%s, %s).\n" (substring (cdr define) 1) (car define)))
 
