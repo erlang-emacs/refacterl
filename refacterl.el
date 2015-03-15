@@ -77,11 +77,29 @@
   (interactive)
   (string= "erl" (file-name-extension (buffer-file-name))))
 
+(defun erlang-header-file? ()
+  (interactive)
+  (string= "hrl" (file-name-extension (buffer-file-name))))
+
 (defun erlang--insert-module ()
   (interactive)
   (if (and (buffer-empty?) (erlang-file?))
       (insert (format "-module(%s)." (erlang-get-module-from-file-name)))
     (message "Refusing to insert module attribute.")))
+
+(defun erlang--insert-header-guard ()
+  (interactive)
+  (if (and (buffer-empty?) (erlang-header-file?))
+      (let ((mod-name (erlang-get-module-from-file-name)))
+        (progn
+          (insert (format "-ifndef(%s_HEADER_GUARD)." (upcase mod-name)))
+          (newline-and-indent)
+          (newline-and-indent)
+          (newline-and-indent)
+          (insert (format "-define(%s_HEADER_GUARD, true)." (upcase mod-name)))
+          (newline-and-indent)
+          (insert "-endif.")))
+    (message "Refusing to insert header guards.")))
 
 (defun define->string (define)
   (format "-define(%s, %s).\n" (substring (cdr define) 1) (car define)))
@@ -199,6 +217,7 @@
       (erlang--unexport-fun-at-point)
     (erlang--export-fun-at-point)))
 
+(add-hook 'erlang-mode-hook 'erlang--insert-header-guard)
 (add-hook 'erlang-mode-hook 'erlang--insert-module)
 
 ;; TODO: make the keybindings more customizable. Perhaps make a
